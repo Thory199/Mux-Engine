@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
     // Crear ventana
-    SDL_Window* window = SDL_CreateWindow("ME12",
+    SDL_Window* window = SDL_CreateWindow("ME1",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
         WIDTH, HEIGHT,
         SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
