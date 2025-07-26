@@ -1,5 +1,8 @@
 C:\UE4\MuxEngine-v0.1.0\src\Core\ME_Main.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\ME_Main.obj
 C:\UE4\MuxEngine-v0.1.0\src\Graphics\gl.c;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\gl.obj
+C:\UE4\MuxEngine-v0.1.0\src\Graphics\RTXLoader.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\RTXLoader.obj
+C:\UE4\MuxEngine-v0.1.0\src\Graphics\rtx_to_bitmap.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\rtx_to_bitmap.obj
+C:\UE4\MuxEngine-v0.1.0\src\Graphics\SplashScene.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\SplashScene.obj
 C:\UE4\MuxEngine-v0.1.0\src\UI\Imgui\imgui.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\imgui.obj
 C:\UE4\MuxEngine-v0.1.0\src\UI\Imgui\imgui_demo.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\imgui_demo.obj
 C:\UE4\MuxEngine-v0.1.0\src\UI\Imgui\imgui_draw.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\imgui_draw.obj

@@ -6,14 +6,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Includes
 include_directories(
-    ${PROJECT_SOURCE_DIR}/external/include  # glad, SDL2, glm, stb, etc.
+    ${PROJECT_SOURCE_DIR}/external/include
     ${PROJECT_SOURCE_DIR}/external/include/SDL2
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/include/Graphics
 )
 
 # Fuentes
 set(ENGINE_SRC
     ${PROJECT_SOURCE_DIR}/src/Core/Me_Main.cpp
     ${PROJECT_SOURCE_DIR}/src/Graphics/gl.c
+    ${PROJECT_SOURCE_DIR}/src/Graphics/SplashScene.cpp
+    ${PROJECT_SOURCE_DIR}/src/Graphics/rtx_to_bitmap.cpp
+    ${PROJECT_SOURCE_DIR}/src/Graphics/RTXLoader.cpp
 )
 
 add_executable(ME1Editor ${ENGINE_SRC})

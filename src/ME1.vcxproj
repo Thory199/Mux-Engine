@@ -21,6 +21,9 @@
   <ItemGroup>
     <ClCompile Include="Core\ME_Main.cpp" />
     <ClCompile Include="Graphics\gl.c" />
+    <ClCompile Include="Graphics\RTXLoader.cpp" />
+    <ClCompile Include="Graphics\rtx_to_bitmap.cpp" />
+    <ClCompile Include="Graphics\SplashScene.cpp" />
     <ClCompile Include="UI\Imgui\imgui.cpp" />
     <ClCompile Include="UI\Imgui\imgui_demo.cpp" />
     <ClCompile Include="UI\Imgui\imgui_draw.cpp" />
@@ -30,6 +33,9 @@
     <ClCompile Include="UI\Imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Graphics\RTXLoader.h" />
+    <ClInclude Include="..\include\Graphics\rtx_to_bitmap.h" />
+    <ClInclude Include="..\include\Graphics\SplashScene.h" />
     <ClInclude Include="..\include\MuxEngine.h" />
     <ClInclude Include="..\include\UI\Imgui\imconfig.h" />
     <ClInclude Include="..\include\UI\Imgui\imgui.h" />
@@ -143,7 +149,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\UE4\MuxEngine-v0.1.0\external\include;C:\UE4\MuxEngine-v0.1.0\external\include\SDL2;C:\UE4\MuxEngine-v0.1.0\include\UI\Imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\UE4\MuxEngine-v0.1.0\external\include;C:\UE4\MuxEngine-v0.1.0\external\include\SDL2;C:\UE4\MuxEngine-v0.1.0\include\UI\Imgui;C:\UE4\MuxEngine-v0.1.0\src\Graphics;C:\UE4\MuxEngine-v0.1.0\src\Core;C:\UE4\MuxEngine-v0.1.0\src\UI;C:\UE4\MuxEngine-v0.1.0\include\Core;C:\UE4\MuxEngine-v0.1.0\include\Input;C:\UE4\MuxEngine-v0.1.0\include\UI;C:\UE4\MuxEngine-v0.1.0\include\Graphics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

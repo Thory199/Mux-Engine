@@ -27,6 +27,9 @@
     <Filter Include="Headers\Imgui">
       <UniqueIdentifier>{93c3ea2d-e3ce-491b-8b20-e836bb9d6ecc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\Graphics">
+      <UniqueIdentifier>{4c0614c7-2bf8-44e5-b82b-7f2d7348aff5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\ME_Main.cpp" />
@@ -52,6 +55,15 @@
       <Filter>UI\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\gl.c">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\RTXLoader.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\SplashScene.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\rtx_to_bitmap.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
   </ItemGroup>
@@ -85,6 +97,15 @@
     </ClInclude>
     <ClInclude Include="..\include\MuxEngine.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Graphics\RTXLoader.h">
+      <Filter>Headers\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Graphics\SplashScene.h">
+      <Filter>Headers\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Graphics\rtx_to_bitmap.h">
+      <Filter>Headers\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
