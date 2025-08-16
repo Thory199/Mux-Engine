@@ -18,42 +18,18 @@
     <Filter Include="Editor">
       <UniqueIdentifier>{4be3e983-1f4a-4a06-81f4-f1ab278126c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Imgui">
-      <UniqueIdentifier>{8a9c12d0-90e1-452d-a5bb-ab276989d1ab}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headers">
       <UniqueIdentifier>{503cff9e-63b4-4f3e-8163-6dfdd46e9f3d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\Imgui">
-      <UniqueIdentifier>{93c3ea2d-e3ce-491b-8b20-e836bb9d6ecc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\Graphics">
       <UniqueIdentifier>{4c0614c7-2bf8-44e5-b82b-7f2d7348aff5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\UI">
+      <UniqueIdentifier>{375f1597-7975-4b55-84fa-4b8ff28a6b85}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\ME_Main.cpp" />
-    <ClCompile Include="UI\Imgui\imgui.cpp">
-      <Filter>UI\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\Imgui\imgui_demo.cpp">
-      <Filter>UI\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\Imgui\imgui_draw.cpp">
-      <Filter>UI\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\Imgui\imgui_impl_opengl3.cpp">
-      <Filter>UI\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\Imgui\imgui_impl_sdl2.cpp">
-      <Filter>UI\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\Imgui\imgui_tables.cpp">
-      <Filter>UI\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\Imgui\imgui_widgets.cpp">
-      <Filter>UI\Imgui</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\gl.c">
       <Filter>Graphics</Filter>
     </ClCompile>
@@ -66,35 +42,26 @@
     <ClCompile Include="Graphics\rtx_to_bitmap.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="UI\Editor\Panel.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Editor\DockGroup.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Editor\DockManager.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Editor\MainTabBar.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\SceneManager.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Canvas2DPanel.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\UI\Imgui\imconfig.h">
-      <Filter>Headers\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\UI\Imgui\imgui.h">
-      <Filter>Headers\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\UI\Imgui\imgui_impl_opengl3.h">
-      <Filter>Headers\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\UI\Imgui\imgui_impl_opengl3_loader.h">
-      <Filter>Headers\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\UI\Imgui\imgui_impl_sdl2.h">
-      <Filter>Headers\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\UI\Imgui\imgui_internal.h">
-      <Filter>Headers\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\UI\Imgui\imstb_rectpack.h">
-      <Filter>Headers\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\UI\Imgui\imstb_textedit.h">
-      <Filter>Headers\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\UI\Imgui\imstb_truetype.h">
-      <Filter>Headers\Imgui</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\MuxEngine.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -107,5 +74,43 @@
     <ClInclude Include="..\include\Graphics\rtx_to_bitmap.h">
       <Filter>Headers\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Define_Global.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\include\UI\Panel.h">
+      <Filter>Headers\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\UI\DockGroup.h">
+      <Filter>Headers\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\UI\DockManager.h">
+      <Filter>Headers\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\UI\MainTabBar.h">
+      <Filter>Headers\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\external\include\SDL2\SDL_image.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Graphics\SceneManager.h">
+      <Filter>Headers\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Graphics\Canvas2DPanel.h">
+      <Filter>Headers\Graphics</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ME1.rc">
+      <Filter>Graphics</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\Users\jorel\Downloads\ComingViewdELEXE.ico">
+      <Filter>Graphics</Filter>
+    </Image>
+    <Image Include="..\..\..\Users\jorel\Downloads\ComingView.ico">
+      <Filter>Graphics</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -3,10 +3,7 @@ C:\UE4\MuxEngine-v0.1.0\src\Graphics\gl.c;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\
 C:\UE4\MuxEngine-v0.1.0\src\Graphics\RTXLoader.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\RTXLoader.obj
 C:\UE4\MuxEngine-v0.1.0\src\Graphics\rtx_to_bitmap.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\rtx_to_bitmap.obj
 C:\UE4\MuxEngine-v0.1.0\src\Graphics\SplashScene.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\SplashScene.obj
-C:\UE4\MuxEngine-v0.1.0\src\UI\Imgui\imgui.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\imgui.obj
-C:\UE4\MuxEngine-v0.1.0\src\UI\Imgui\imgui_demo.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\imgui_demo.obj
-C:\UE4\MuxEngine-v0.1.0\src\UI\Imgui\imgui_draw.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\imgui_draw.obj
-C:\UE4\MuxEngine-v0.1.0\src\UI\Imgui\imgui_impl_opengl3.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\imgui_impl_opengl3.obj
-C:\UE4\MuxEngine-v0.1.0\src\UI\Imgui\imgui_impl_sdl2.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\imgui_impl_sdl2.obj
-C:\UE4\MuxEngine-v0.1.0\src\UI\Imgui\imgui_tables.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\imgui_tables.obj
-C:\UE4\MuxEngine-v0.1.0\src\UI\Imgui\imgui_widgets.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\imgui_widgets.obj
+C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\DockGroup.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\DockGroup.obj
+C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\DockManager.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\DockManager.obj
+C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\MainTabBar.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\MainTabBar.obj
+C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\Panel.cpp;C:\UE4\MuxEngine-v0.1.0\src\x64\Debug\Panel.obj

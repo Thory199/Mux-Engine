@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <string>
 
-LRESULT CALLBACK SplashWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+static LRESULT CALLBACK SplashWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     if (msg == WM_DESTROY) {
         PostQuitMessage(0);
         return 0;
@@ -22,7 +22,10 @@ void mostrarSplashScreen(const char* rutaImagen, int ancho, int alto, int milise
     RegisterClass(&wc);
 
     // Convertir ruta a formato wide string
-    std::wstring rutaW(rutaImagen, rutaImagen + strlen(rutaImagen));
+    int len = MultiByteToWideChar(CP_UTF8, 0, rutaImagen, -1, NULL, 0);
+    std::wstring rutaW(len, 0);
+    MultiByteToWideChar(CP_UTF8, 0, rutaImagen, -1, &rutaW[0], len);
+
 
     // Centrar la ventana en pantalla
     int screenWidth = GetSystemMetrics(SM_CXSCREEN);
@@ -44,6 +47,8 @@ void mostrarSplashScreen(const char* rutaImagen, int ancho, int alto, int milise
     if (!hBitmap) return;
 
     ShowWindow(hwnd, SW_SHOW);
+    SetWindowPos(hwnd, HWND_TOPMOST, x, y, ancho, alto, SWP_NOZORDER | SWP_NOSIZE | SWP_SHOWWINDOW);
+
     UpdateWindow(hwnd);
 
     HDC hdc = GetDC(hwnd);

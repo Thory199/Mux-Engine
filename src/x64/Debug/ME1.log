@@ -1,2 +1,20 @@
 ﻿  ME_Main.cpp
-  ME1.vcxproj -> C:\UE4\MuxEngine-v0.1.0\bin\Debug\ME\ME1Editor.exe
+C:\UE4\MuxEngine-v0.1.0\src\Core\ME_Main.cpp(1,10): error C1083: No se puede abrir el archivo incluir: 'windows.hh': No such file or directory
+  DockGroup.cpp
+C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\DockGroup.cpp(25,13): error C2065: 'resizing': identificador no declarado
+C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\DockGroup.cpp(26,13): error C2065: 'resizeOffsetX': identificador no declarado
+C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\DockGroup.cpp(27,13): error C2065: 'resizeOffsetY': identificador no declarado
+C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\DockGroup.cpp(73,9): error C2065: 'resizing': identificador no declarado
+C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\DockGroup.cpp(102,18): error C2065: 'resizing': identificador no declarado
+C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\DockGroup.cpp(103,36): error C2065: 'resizeOffsetX': identificador no declarado
+C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\DockGroup.cpp(104,36): error C2065: 'resizeOffsetY': identificador no declarado
+  Panel.cpp
+C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\Panel.cpp(4,13): error C2084: la función 'void Panel::handleEvent(const SDL_Event &)' ya tiene un cuerpo
+      C:\UE4\MuxEngine-v0.1.0\include\UI\Panel.h(19,18):
+      vea la definición anterior de “Panel::handleEvent”
+  
+C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\Panel.cpp(27,13): error C2084: la función 'void Panel::render(SDL_Renderer *,TTF_Font *)' ya tiene un cuerpo
+      C:\UE4\MuxEngine-v0.1.0\include\UI\Panel.h(20,18):
+      vea la definición anterior de “Panel::render”
+  
+  Generando código...

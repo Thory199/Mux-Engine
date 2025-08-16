@@ -20,32 +20,38 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\ME_Main.cpp" />
+    <ClCompile Include="Graphics\Canvas2DPanel.cpp" />
     <ClCompile Include="Graphics\gl.c" />
     <ClCompile Include="Graphics\RTXLoader.cpp" />
     <ClCompile Include="Graphics\rtx_to_bitmap.cpp" />
+    <ClCompile Include="Graphics\SceneManager.cpp" />
     <ClCompile Include="Graphics\SplashScene.cpp" />
-    <ClCompile Include="UI\Imgui\imgui.cpp" />
-    <ClCompile Include="UI\Imgui\imgui_demo.cpp" />
-    <ClCompile Include="UI\Imgui\imgui_draw.cpp" />
-    <ClCompile Include="UI\Imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="UI\Imgui\imgui_impl_sdl2.cpp" />
-    <ClCompile Include="UI\Imgui\imgui_tables.cpp" />
-    <ClCompile Include="UI\Imgui\imgui_widgets.cpp" />
+    <ClCompile Include="UI\Editor\DockGroup.cpp" />
+    <ClCompile Include="UI\Editor\DockManager.cpp" />
+    <ClCompile Include="UI\Editor\MainTabBar.cpp" />
+    <ClCompile Include="UI\Editor\Panel.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\external\include\SDL2\SDL_image.h" />
+    <ClInclude Include="..\include\Define_Global.h" />
+    <ClInclude Include="..\include\Graphics\Canvas2DPanel.h" />
     <ClInclude Include="..\include\Graphics\RTXLoader.h" />
     <ClInclude Include="..\include\Graphics\rtx_to_bitmap.h" />
+    <ClInclude Include="..\include\Graphics\SceneManager.h" />
     <ClInclude Include="..\include\Graphics\SplashScene.h" />
     <ClInclude Include="..\include\MuxEngine.h" />
-    <ClInclude Include="..\include\UI\Imgui\imconfig.h" />
-    <ClInclude Include="..\include\UI\Imgui\imgui.h" />
-    <ClInclude Include="..\include\UI\Imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="..\include\UI\Imgui\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="..\include\UI\Imgui\imgui_impl_sdl2.h" />
-    <ClInclude Include="..\include\UI\Imgui\imgui_internal.h" />
-    <ClInclude Include="..\include\UI\Imgui\imstb_rectpack.h" />
-    <ClInclude Include="..\include\UI\Imgui\imstb_textedit.h" />
-    <ClInclude Include="..\include\UI\Imgui\imstb_truetype.h" />
+    <ClInclude Include="..\include\UI\DockGroup.h" />
+    <ClInclude Include="..\include\UI\DockManager.h" />
+    <ClInclude Include="..\include\UI\MainTabBar.h" />
+    <ClInclude Include="..\include\UI\Panel.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ME1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\Users\jorel\Downloads\ComingView.ico" />
+    <Image Include="..\..\..\Users\jorel\Downloads\ComingViewdELEXE.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -149,13 +155,13 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\UE4\MuxEngine-v0.1.0\external\include;C:\UE4\MuxEngine-v0.1.0\external\include\SDL2;C:\UE4\MuxEngine-v0.1.0\include\UI\Imgui;C:\UE4\MuxEngine-v0.1.0\src\Graphics;C:\UE4\MuxEngine-v0.1.0\src\Core;C:\UE4\MuxEngine-v0.1.0\src\UI;C:\UE4\MuxEngine-v0.1.0\include\Core;C:\UE4\MuxEngine-v0.1.0\include\Input;C:\UE4\MuxEngine-v0.1.0\include\UI;C:\UE4\MuxEngine-v0.1.0\include\Graphics;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\UE4\MuxEngine-v0.1.0\external\include;C:\UE4\MuxEngine-v0.1.0\external\include\SDL2;C:\UE4\MuxEngine-v0.1.0\include\UI\Imgui;C:\UE4\MuxEngine-v0.1.0\src\Graphics;C:\UE4\MuxEngine-v0.1.0\src\Core;C:\UE4\MuxEngine-v0.1.0\src\UI;C:\UE4\MuxEngine-v0.1.0\include\Core;C:\UE4\MuxEngine-v0.1.0\include\Input;C:\UE4\MuxEngine-v0.1.0\include\UI;C:\UE4\MuxEngine-v0.1.0\include\Graphics;C:\UE4\MuxEngine-v0.1.0\src\UI\Imgui;C:\UE4\MuxEngine-v0.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\UE4\MuxEngine-v0.1.0\lib\x64\Debug;C:\UE4\MuxEngine-v0.1.0\ThirdParty\stb;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;SDL2_ttf.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
