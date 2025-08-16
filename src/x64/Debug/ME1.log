@@ -1,6 +1,4 @@
-﻿  ME_Main.cpp
-C:\UE4\MuxEngine-v0.1.0\src\Core\ME_Main.cpp(1,10): error C1083: No se puede abrir el archivo incluir: 'windows.hh': No such file or directory
-  DockGroup.cpp
+﻿  DockGroup.cpp
 C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\DockGroup.cpp(25,13): error C2065: 'resizing': identificador no declarado
 C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\DockGroup.cpp(26,13): error C2065: 'resizeOffsetX': identificador no declarado
 C:\UE4\MuxEngine-v0.1.0\src\UI\Editor\DockGroup.cpp(27,13): error C2065: 'resizeOffsetY': identificador no declarado
