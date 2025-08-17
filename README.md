@@ -73,6 +73,11 @@ Creado por Thory, programador independiente de motores de juego.
 \- `docs/` – Ideas, diseño técnico, notas
 
 
+AUN ESTAMOS EMPEZANDO
+
+
+
+
 ![Mux Engine – captura](docs/img/mux_engine_001.png "Estado actual del motor")
 
 
