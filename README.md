@@ -26,7 +26,7 @@ Creado por Thory, programador independiente de motores de juego.
 
 \- Sistema de ventanas con SDL2
 
-\- Interfaz visual usando ImGui
+\- Interfaz visual usando SDL2 - NUNCA NUNCA Imgui
 
 \- Entrada de teclado y ratón básica
 
