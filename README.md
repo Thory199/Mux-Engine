@@ -73,6 +73,10 @@ Creado por Thory, programador independiente de motores de juego.
 \- `docs/` – Ideas, diseño técnico, notas
 
 
+![Mux Engine – captura](docs/img/mux_engine_001.png "Estado actual del motor")
+
+
+
 
 \## ⚙️ Compilación con CMake
 
@@ -87,6 +91,8 @@ cd build
 cmake ..
 
 cmake --build .
+
+
 
 
 
