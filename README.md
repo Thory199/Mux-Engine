@@ -14,7 +14,7 @@ Creado por Thory, programador independiente de motores de juego.
 
 
 
-\*\*MuxEngine\*\* es un motor de videojuegos 2D y 3D en desarrollo, hecho desde cero en C++ utilizando SDL2, OpenGL, ImGui y otras librerías. Su objetivo es ser un motor modular, ligero y potente, ideal para crear juegos indie con herramientas visuales similares a Blueprint de Unreal Engine.
+\*\*MuxEngine\*\* es un motor de videojuegos 2D y 3D en desarrollo, hecho desde cero en C++ utilizando SDL2, OpenGL y otras librerías. Su objetivo es ser un motor modular, ligero y potente, ideal para crear juegos indie con herramientas visuales similares a Blueprint de Unreal Engine.
 
 
 
@@ -49,8 +49,6 @@ Creado por Thory, programador independiente de motores de juego.
 \- GLAD
 
 \- GLM
-
-\- ImGui
 
 \- stb\_image
 
