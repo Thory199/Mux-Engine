@@ -1,177 +1,90 @@
-﻿#include "DockGroup.h"
-#include "DockManager.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
-#include <algorithm> // Para std::max
+#include "DockGroup.h"
+#include <algorithm>
 
-extern SDL_Window* gWindow;
+DockGroup::DockGroup(const SDL_Rect& bounds)
+    : m_bounds(bounds) {
+}
 
-const int MENU_BAR_HEIGHT = 60;
-const int SNAP_DISTANCE = 10;
+void DockGroup::addPanel(const std::shared_ptr<Panel>& p) {
+    if (!p) return;
 
-void DockGroup::handleEvent(const SDL_Event& event) {
-    if (tabs.empty()) return;
+    if (p->rect.w <= 0) p->rect.w = std::max(80, m_bounds.w);
+    if (p->rect.h <= 0) p->rect.h = 60;
 
-    int mx = event.type == SDL_MOUSEMOTION ? event.motion.x : event.button.x;
-    int my = event.type == SDL_MOUSEMOTION ? event.motion.y : event.button.y;
-
-    SDL_Rect titleBar = { rect.x, rect.y, rect.w, 25 };
-
-    // Detección de clic en esquina inferior derecha para redimensionar
-    if (event.type == SDL_MOUSEBUTTONDOWN) {
-        SDL_Rect resizeZone = { rect.x + rect.w - 10, rect.y + rect.h - 10, 10, 10 };
-        if (mx >= resizeZone.x && mx <= resizeZone.x + resizeZone.w &&
-            my >= resizeZone.y && my <= resizeZone.y + resizeZone.h) {
-            resizing = true;
-            resizeOffsetX = (rect.x + rect.w) - mx;
-            resizeOffsetY = (rect.y + rect.h) - my;
-            return;
-        }
-
-        if (mx >= titleBar.x && mx <= titleBar.x + titleBar.w &&
-            my >= titleBar.y && my <= titleBar.y + titleBar.h) {
-
-            int tabX = rect.x + 5;
-            bool clickedTab = false;
-
-            for (size_t i = 0; i < tabs.size(); ++i) {
-                int textW = static_cast<int>(tabs[i]->title.size()) * 8;
-                int tabW = textW + 30;
-
-                SDL_Rect tabRect = { tabX, rect.y, tabW, 25 };
-                SDL_Rect closeBtn = { tabX + tabW - 20, rect.y + 5, 10, 10 };
-
-                if (mx >= closeBtn.x && mx <= closeBtn.x + closeBtn.w &&
-                    my >= closeBtn.y && my <= closeBtn.y + closeBtn.h) {
-                    tabs.erase(tabs.begin() + i);
-                    if (tabs.empty()) {
-                        rect = { 0,0,0,0 };
-                    }
-                    else if (activeTabIndex >= static_cast<int>(tabs.size())) {
-                        activeTabIndex = 0;
-                    }
-                    return;
-                }
-
-                if (mx >= tabRect.x && mx <= tabRect.x + tabRect.w) {
-                    activeTabIndex = static_cast<int>(i);
-                    clickedTab = true;
-                    return;
-                }
-                tabX += tabW + 5;
-            }
-
-            if (!clickedTab) {
-                dragging = true;
-                dragOffsetX = mx - rect.x;
-                dragOffsetY = my - rect.y;
-            }
-        }
-    }
-    else if (event.type == SDL_MOUSEBUTTONUP) {
-        dragging = false;
-        resizing = false;
-    }
-    else if (event.type == SDL_MOUSEMOTION) {
-        if (dragging) {
-            rect.x = mx - dragOffsetX;
-            rect.y = my - dragOffsetY;
-
-            int winW, winH;
-            SDL_GetWindowSize(gWindow, &winW, &winH);
-
-            if (rect.x < 0) rect.x = 0;
-            if (rect.y < MENU_BAR_HEIGHT) rect.y = MENU_BAR_HEIGHT;
-            if (rect.x + rect.w > winW) rect.x = winW - rect.w;
-            if (rect.y + rect.h > winH) rect.y = winH - rect.h;
-
-            for (auto& other : DockManager::getDocks()) {
-                if (&other == this || other.rect.w == 0 || other.rect.h == 0) continue;
-
-                if (abs((rect.x + rect.w) - other.rect.x) <= SNAP_DISTANCE)
-                    rect.x = other.rect.x - rect.w;
-                else if (abs(rect.x - (other.rect.x + other.rect.w)) <= SNAP_DISTANCE)
-                    rect.x = other.rect.x + other.rect.w;
-
-                if (abs((rect.y + rect.h) - other.rect.y) <= SNAP_DISTANCE)
-                    rect.y = other.rect.y - rect.h;
-                else if (abs(rect.y - (other.rect.y + other.rect.h)) <= SNAP_DISTANCE)
-                    rect.y = other.rect.y + other.rect.h;
-            }
-        }
-        else if (resizing) {
-            rect.w = mx - rect.x + resizeOffsetX;
-            rect.h = my - rect.y + resizeOffsetY;
-
-            if (rect.w < 100) rect.w = 100;
-            if (rect.h < 100) rect.h = 100;
-        }
+    if (!rectContains(m_bounds, p->rect)) {
+        const int pad = 8;
+        p->rect.x = m_bounds.x + pad;
+        p->rect.y = m_bounds.y + pad;
+        p->rect.w = std::min(p->rect.w, m_bounds.w - pad * 2);
+        p->rect.h = std::min(p->rect.h, m_bounds.h - pad * 2);
     }
 
-    if (activeTabIndex < static_cast<int>(tabs.size())) {
-        tabs[activeTabIndex]->rect = { rect.x, rect.y + 25, rect.w, rect.h - 25 };
-        tabs[activeTabIndex]->handleEvent(event);
+    m_panels.emplace_back(p);
+    layoutVertical();
+}
+
+bool DockGroup::removePanel(const std::shared_ptr<Panel>& p) {
+    auto it = std::remove_if(m_panels.begin(), m_panels.end(),
+        [&](const std::shared_ptr<Panel>& q) { return q.get() == p.get(); });
+    bool removed = (it != m_panels.end());
+    m_panels.erase(it, m_panels.end());
+    if (removed) layoutVertical();
+    return removed;
+}
+
+void DockGroup::handleEvent(const SDL_Event& e) {
+    for (auto it = m_panels.rbegin(); it != m_panels.rend(); ++it) {
+        auto& p = *it;
+        if (p && p->isVisible()) {
+            p->handleEvent(e);
+        }
     }
 }
 
 void DockGroup::render(SDL_Renderer* renderer, TTF_Font* font) {
-    SDL_Color white = { 255, 255, 255, 255 };
-    SDL_Color gray = { 180, 180, 180, 255 };
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(renderer, 18, 18, 22, 140);
+    SDL_RenderFillRect(renderer, &m_bounds);
 
-    int totalTabWidth = 10;
-    for (size_t i = 0; i < tabs.size(); ++i) {
-        int textW = static_cast<int>(tabs[i]->title.size()) * 8;
-        int tabW = textW + 30;
-        totalTabWidth += tabW + 5;
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 200);
+    SDL_RenderDrawRect(renderer, &m_bounds);
+
+    for (auto& p : m_panels) {
+        if (p && p->isVisible()) {
+            p->render(renderer, font);
+        }
     }
-    if (totalTabWidth > rect.w) rect.w = totalTabWidth;
+}
 
-    SDL_SetRenderDrawColor(renderer, 50, 50, 60, 255);
-    SDL_RenderFillRect(renderer, &rect);
+void DockGroup::setBounds(const SDL_Rect& r) {
+    m_bounds = r;
+    layoutVertical();
+}
 
-    // Borde negro de 2px
-    for (int i = 0; i < 2; ++i) {
-        SDL_Rect border = { rect.x - i, rect.y - i, rect.w + i * 2, rect.h + i * 2 };
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderDrawRect(renderer, &border);
+SDL_Rect DockGroup::getBounds() const {
+    return m_bounds;
+}
+
+std::vector<std::shared_ptr<Panel>>& DockGroup::panels() { return m_panels; }
+const std::vector<std::shared_ptr<Panel>>& DockGroup::panels() const { return m_panels; }
+
+bool DockGroup::rectContains(const SDL_Rect& outer, const SDL_Rect& inner) {
+    return inner.x >= outer.x && inner.y >= outer.y &&
+        inner.x + inner.w <= outer.x + outer.w &&
+        inner.y + inner.h <= outer.y + outer.h;
+}
+
+void DockGroup::layoutVertical() {
+    const int pad = 8;
+    int y = m_bounds.y + pad;
+    for (auto& p : m_panels) {
+        if (!p) continue;
+        int h = std::max(p->rect.h, 80);
+        p->rect.x = m_bounds.x + pad;
+        p->rect.y = y;
+        p->rect.w = std::max(80, m_bounds.w - pad * 2);
+        p->rect.h = std::min(h, std::max(80, m_bounds.h - (y - m_bounds.y) - pad));
+        y += p->rect.h + pad;
+        if (y > m_bounds.y + m_bounds.h - pad) break;
     }
-
-    SDL_Rect tabBar = { rect.x, rect.y, rect.w, 25 };
-    SDL_SetRenderDrawColor(renderer, 70, 70, 80, 255);
-    SDL_RenderFillRect(renderer, &tabBar);
-
-    int tabX = rect.x + 5;
-    for (size_t i = 0; i < tabs.size(); ++i) {
-        int textW = static_cast<int>(tabs[i]->title.size()) * 8;
-        int tabW = textW + 30;
-        SDL_Rect tabRect = { tabX, rect.y, tabW, 25 };
-        SDL_SetRenderDrawColor(renderer, 90, 90, 100, 255);
-        SDL_RenderFillRect(renderer, &tabRect);
-
-        SDL_Surface* surface = TTF_RenderText_Solid(font, tabs[i]->title.c_str(), white);
-        SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-        SDL_Rect textRect = { tabX + 5, rect.y + 4, surface->w, surface->h };
-        SDL_RenderCopy(renderer, texture, nullptr, &textRect);
-        SDL_FreeSurface(surface);
-        SDL_DestroyTexture(texture);
-
-        SDL_Surface* xSurf = TTF_RenderText_Solid(font, "X", gray);
-        SDL_Texture* xTex = SDL_CreateTextureFromSurface(renderer, xSurf);
-        SDL_Rect xRect = { tabX + tabW - 15, rect.y + 4, xSurf->w, xSurf->h };
-        SDL_RenderCopy(renderer, xTex, nullptr, &xRect);
-        SDL_FreeSurface(xSurf);
-        SDL_DestroyTexture(xTex);
-
-        tabX += tabW + 5;
-    }
-
-    if (activeTabIndex < static_cast<int>(tabs.size())) {
-        tabs[activeTabIndex]->rect = { rect.x, rect.y + 25, rect.w, rect.h - 25 };
-        tabs[activeTabIndex]->render(renderer, font);
-    }
-
-    // Dibujar indicador de redimensionar en esquina
-    SDL_Rect resizeCorner = { rect.x + rect.w - 10, rect.y + rect.h - 10, 10, 10 };
-    SDL_SetRenderDrawColor(renderer, 120, 120, 130, 255);
-    SDL_RenderFillRect(renderer, &resizeCorner);
 }

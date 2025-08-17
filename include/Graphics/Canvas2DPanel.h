@@ -3,18 +3,13 @@
 
 class Canvas2DPanel : public Panel {
 public:
+    // Constructor ejemplo (ajusta rect/título si quieres)
     Canvas2DPanel();
+    explicit Canvas2DPanel(const SDL_Rect& r, const char* t = "Canvas 2D");
+    Canvas2DPanel(int x, int y, int w, int h, const char* t = "Canvas 2D");
 
-    void handleEvent(const SDL_Event& event) override;
+    // Asegura que override coincida EXACTO
+    void handleEvent(const SDL_Event& e) override;
     void render(SDL_Renderer* renderer, TTF_Font* font) override;
-
-private:
-    bool panning = false;
-    int panStartX = 0;
-    int panStartY = 0;
-    int offsetX = 0;
-    int offsetY = 0;
-
-    void drawGrid(SDL_Renderer* renderer, const SDL_Rect& area);
 };
 
