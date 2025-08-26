@@ -26,7 +26,7 @@ Creado por Thory, programador independiente de motores de juego.
 
 \- Sistema de ventanas con SDL2
 
-\- Interfaz visual usando ImGui
+\- Interfaz visual usando SDL2 - NUNCA NUNCA Imgui
 
 \- Entrada de teclado y ratón básica
 
@@ -73,6 +73,15 @@ Creado por Thory, programador independiente de motores de juego.
 \- `docs/` – Ideas, diseño técnico, notas
 
 
+AUN ESTAMOS EMPEZANDO
+
+
+
+
+![Mux Engine – captura](docs/img/mux_engine_001.png "Estado actual del motor")
+
+
+
 
 \## ⚙️ Compilación con CMake
 
@@ -87,6 +96,8 @@ cd build
 cmake ..
 
 cmake --build .
+
+
 
 
 
