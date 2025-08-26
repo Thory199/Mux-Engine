@@ -1,0 +1,10 @@
+# Corrupt desktop layout v1
+# name,x,y
+# Arrastrar con el ratón: mantén clic izquierdo sobre el icono (o su etiqueta), suéltalo donde quieras.
+# Guardar posiciones actuales: pulsa Ctrl+S → crea/actualiza Data/Local/Location/desktop_layout.txt.
+# Cargar posiciones desde archivo: pulsa Ctrl+L (o edita el archivo y vuelve a cargar).
+# Made by Thory
+Mi PC,28,16
+Documentos,29,146
+Imágenes,30,278
+Papelera,1278,572
