@@ -6,7 +6,7 @@ Estado actual
 
 🔧 En desarrollo – fase de arquitectura y pruebas.
 
-
+EN ESTA RAMA SE MUESTRAN LOS ARCHIVOS YA LISTOS PARA USAR .
 
 ✨ Autor
 
@@ -14,7 +14,7 @@ Creado por Thory, programador independiente de motores de juego.
 
 
 
-\*\*MuxEngine\*\* es un motor de videojuegos 2D y 3D en desarrollo, hecho desde cero en C++ utilizando SDL2, OpenGL y otras librerías. Su objetivo es ser un motor modular, ligero y potente, ideal para crear juegos indie con herramientas visuales similares a Blueprint de Unreal Engine.
+\*\*MuxEngine\*\* es un motor de videojuegos 2D y 3D en desarrollo, hecho desde cero en C++ utilizando SDL2, OpenGL y otras librerías. Su objetivo es ser un motor modular, ligero y potente, ideal para crear juegos indie con herramientas visuales similares a Blueprint de Unreal Engine 4.27.2 .
 
 
 
@@ -26,11 +26,17 @@ Creado por Thory, programador independiente de motores de juego.
 
 \- Sistema de ventanas con SDL2
 
-\- Interfaz visual usando SDL2
+\- Interfaz visual usando SDL2 - NUNCA NUNCA Imgui
 
 \- Entrada de teclado y ratón básica
 
 \- Estructura modular del motor por componentes
+
+\- Sistema de cambio de idioma INGLES Y ESPAÑOL
+
+\- Rutas de los Assets del Editor cambiadas a Globales en un solo archivo .h
+
+\- Sistema de Pestañas 
 
 \- En camino: editor visual integrado
 
@@ -50,8 +56,6 @@ Creado por Thory, programador independiente de motores de juego.
 
 \- GLM
 
-\- NO USA ImGui  ( NUNCA )
-
 \- stb\_image
 
 
@@ -60,11 +64,9 @@ Creado por Thory, programador independiente de motores de juego.
 
 
 
-\- `src/` – Código fuente (.cpp)
+\- `include/` – Librerías externas
 
-\- `include/` – Headers propios del motor
-
-\- `external/` – Librerías externas
+\- `src/` – Código fuente de Headers y cpp propios del motor
 
 \- `lib/` – Librerías precompiladas (.dll, .lib)
 
@@ -73,6 +75,19 @@ Creado por Thory, programador independiente de motores de juego.
 \- `assets/` – Texturas, sonidos, fuentes de prueba
 
 \- `docs/` – Ideas, diseño técnico, notas
+
+
+AUN ESTAMOS EMPEZANDO
+
+
+
+
+![Mux Engine – captura](docs/img/mux_engine_001.1.png "Estado actual del motor 1")
+
+![Mux Engine – captura](docs/img/mux_engine_001.2.png "Estado actual del motor 2")
+
+
+
 
 
 
@@ -85,6 +100,8 @@ Creado por Thory, programador independiente de motores de juego.
 mkdir build
 
 cd build
+
+cmake ..
 
 cmake ..
 
