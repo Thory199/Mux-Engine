@@ -64,11 +64,9 @@ Creado por Thory, programador independiente de motores de juego.
 
 
 
-\- `src/` – Código fuente (.cpp)
-
 \- `include/` – Librerías externas
 
-\- `src/` – Headers y cpp propios del motor
+\- `src/` – Código fuente de Headers y cpp propios del motor
 
 \- `lib/` – Librerías precompiladas (.dll, .lib)
 
