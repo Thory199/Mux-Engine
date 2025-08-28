@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Common\headers\AssetPaths.h" />
     <ClInclude Include="Common\headers\Define_Global.h" />
     <ClInclude Include="Common\headers\MuxEngine.h" />
     <ClInclude Include="Graphics\headers\Canvas2DPanel.h" />
@@ -27,7 +28,6 @@
     <ClInclude Include="Graphics\headers\SceneManager.h" />
     <ClInclude Include="Graphics\headers\SplashScene.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="UI\headers\AssetPaths.h" />
     <ClInclude Include="UI\headers\DockGroup.h" />
     <ClInclude Include="UI\headers\DockManager.h" />
     <ClInclude Include="UI\headers\MainTabBar.h" />

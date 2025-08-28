@@ -47,7 +47,7 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="UI\headers\AssetPaths.h">
+    <ClInclude Include="Common\headers\AssetPaths.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
