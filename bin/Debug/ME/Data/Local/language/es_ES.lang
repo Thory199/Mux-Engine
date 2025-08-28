@@ -7,4 +7,5 @@ ui.title = Proyecto ME1
 ui.tab.default = Proyecto ME1
 msg.loading = Cargando...
 ui.tab.untitled = Sin título
-
+ui.menu.developer_tools = Herramientas de desarrollador
+ui.menu.output_log = Registro de salida

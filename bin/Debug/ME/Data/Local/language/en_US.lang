@@ -7,4 +7,6 @@ ui.title = ME1 Project
 ui.tab.default = ME1 Project
 msg.loading = Loading...
 ui.tab.untitled = Untitled
+ui.menu.developer_tools = Developer Tools
+ui.menu.output_log = Output Log
 
