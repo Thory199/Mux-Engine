@@ -6,7 +6,7 @@ Estado actual
 
 🔧 En desarrollo – fase de arquitectura y pruebas.
 
-
+AQUI SE ARAN LOS CAMBIOS Y CUANDO TODO ESTE BIEN SE PASARA LA RAMA MASTER .
 
 ✨ Autor
 
@@ -14,7 +14,7 @@ Creado por Thory, programador independiente de motores de juego.
 
 
 
-\*\*MuxEngine\*\* es un motor de videojuegos 2D y 3D en desarrollo, hecho desde cero en C++ utilizando SDL2, OpenGL y otras librerías. Su objetivo es ser un motor modular, ligero y potente, ideal para crear juegos indie con herramientas visuales similares a Blueprint de Unreal Engine.
+\*\*MuxEngine\*\* es un motor de videojuegos 2D y 3D en desarrollo, hecho desde cero en C++ utilizando SDL2, OpenGL y otras librerías. Su objetivo es ser un motor modular, ligero y potente, ideal para crear juegos indie con herramientas visuales similares a Blueprint de Unreal Engine 4.27.2 .
 
 
 
@@ -31,6 +31,12 @@ Creado por Thory, programador independiente de motores de juego.
 \- Entrada de teclado y ratón básica
 
 \- Estructura modular del motor por componentes
+
+\- Sistema de cambio de idioma INGLES Y ESPAÑOL
+
+\- Rutas de los Assets del Editor cambiadas a Globales en un solo archivo .h
+
+\- Sistema de Pestañas 
 
 \- En camino: editor visual integrado
 
@@ -60,9 +66,9 @@ Creado por Thory, programador independiente de motores de juego.
 
 \- `src/` – Código fuente (.cpp)
 
-\- `include/` – Headers propios del motor
+\- `include/` – Librerías externas
 
-\- `external/` – Librerías externas
+\- `src/` – Headers y cpp propios del motor
 
 \- `lib/` – Librerías precompiladas (.dll, .lib)
 
