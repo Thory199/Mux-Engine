@@ -42,12 +42,13 @@ void MainTabBar::initialize(SDL_Renderer* renderer) {
     tabs.push_back({ "ME1 Project", true });
     activeTabIndex = 0;
 
-    texClose = LoadSurfaceAsTexture(renderer, "Data/Interface/close_idle.png");
-    texCloseActive = LoadSurfaceAsTexture(renderer, "Data/Interface/close_active.png");
-    texMinimize = LoadSurfaceAsTexture(renderer, "Data/Interface/minimize_idle.png");
-    texMinimizeActive = LoadSurfaceAsTexture(renderer, "Data/Interface/minimize_active.png");
-    texMaximize = LoadSurfaceAsTexture(renderer, "Data/Interface/maximize_idle.png");
-    texMaximizeActive = LoadSurfaceAsTexture(renderer, "Data/Interface/maximize_active.png");
+    // SOLO cambio: rutas literales -> Paths::InInterface(...)
+    texClose = LoadSurfaceAsTexture(renderer, Paths::InInterface("close_idle.png").c_str());
+    texCloseActive = LoadSurfaceAsTexture(renderer, Paths::InInterface("close_active.png").c_str());
+    texMinimize = LoadSurfaceAsTexture(renderer, Paths::InInterface("minimize_idle.png").c_str());
+    texMinimizeActive = LoadSurfaceAsTexture(renderer, Paths::InInterface("minimize_active.png").c_str());
+    texMaximize = LoadSurfaceAsTexture(renderer, Paths::InInterface("maximize_idle.png").c_str());
+    texMaximizeActive = LoadSurfaceAsTexture(renderer, Paths::InInterface("maximize_active.png").c_str());
 
     // Fondo de la franja
     texTabBG = IMG_LoadTexture(renderer, Paths::TabBarBG);
@@ -91,35 +92,27 @@ void MainTabBar::render(SDL_Renderer* renderer, TTF_Font* font) {
 
     for (size_t i = 0; i < tabs.size(); ++i) {
         SDL_Rect tabRect = getTabRect(static_cast<int>(i));
-
         tabRect.w += 40;  // alarga 40 px (ajusta a tu gusto)
-
 
         // Dibuja la imagen de la pestaña (mismo asset para todas)
         if (texTabItem) {
             SDL_RenderCopy(renderer, texTabItem, nullptr, &tabRect);
         }
         else {
-            // Respaldo si no cargó
             SDL_SetRenderDrawColor(renderer, 50, 50, 55, 255);
             SDL_RenderFillRect(renderer, &tabRect);
         }
-
-        
 
         // Título
         if (font) {
             SDL_Surface* surface = TTF_RenderText_Solid(font, tabs[i].title.c_str(), white);
             if (surface) {
                 SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-                // Centrado vertical suave
-                
-                SDL_Rect textRect = { tabRect.x + (tabRect.w - surface->w) / 2,
-                      tabRect.y + (tabRect.h - surface->h) / 2,
-                      surface->w,
-                      surface->h };
-
-
+                SDL_Rect textRect = {
+                    tabRect.x + (tabRect.w - surface->w) / 2,
+                    tabRect.y + (tabRect.h - surface->h) / 2,
+                    surface->w, surface->h
+                };
                 SDL_RenderCopy(renderer, texture, nullptr, &textRect);
                 SDL_FreeSurface(surface);
                 SDL_DestroyTexture(texture);
@@ -131,7 +124,9 @@ void MainTabBar::render(SDL_Renderer* renderer, TTF_Font* font) {
             SDL_Surface* xSurf = TTF_RenderText_Solid(font, "X", gray);
             if (xSurf) {
                 SDL_Texture* xTex = SDL_CreateTextureFromSurface(renderer, xSurf);
-                SDL_Rect xRect = { tabRect.x + tabRect.w - 15, tabRect.y + (tabRect.h - xSurf->h) / 2, xSurf->w, xSurf->h };
+                SDL_Rect xRect = { tabRect.x + tabRect.w - 15,
+                                   tabRect.y + (tabRect.h - xSurf->h) / 2,
+                                   xSurf->w, xSurf->h };
                 SDL_RenderCopy(renderer, xTex, nullptr, &xRect);
                 SDL_FreeSurface(xSurf);
                 SDL_DestroyTexture(xTex);
@@ -216,4 +211,12 @@ void MainTabBar::shutdown() {
     destroy(texTabBG);
     destroy(texTabItem); // NUEVO
 }
+
+void MainTabBar::setFirstTabTitle(const std::string& title) {
+    if (!tabs.empty()) {
+        tabs[0].title = title;
+    }
+}
+
+
 

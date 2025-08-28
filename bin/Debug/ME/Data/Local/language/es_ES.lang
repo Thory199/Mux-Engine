@@ -1,0 +1,10 @@
+# Español (ES) — ME1 Engine
+ui.menu.file = Archivo
+ui.menu.edit = Editar
+ui.menu.window = Ventanas
+ui.menu.help = Ayuda
+ui.title = Proyecto ME1
+ui.tab.default = Proyecto ME1
+msg.loading = Cargando...
+ui.tab.untitled = Sin título
+

@@ -50,6 +50,9 @@
     <ClInclude Include="Common\headers\AssetPaths.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="Common\headers\Language.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\cpp\ME_Main.cpp">
@@ -83,6 +86,12 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="UI\cpp\Panel.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\cpp\AssetPaths.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\cpp\Language.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

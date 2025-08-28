@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Common\headers\AssetPaths.h" />
     <ClInclude Include="Common\headers\Define_Global.h" />
+    <ClInclude Include="Common\headers\Language.h" />
     <ClInclude Include="Common\headers\MuxEngine.h" />
     <ClInclude Include="Graphics\headers\Canvas2DPanel.h" />
     <ClInclude Include="Graphics\headers\RTXLoader.h" />
@@ -34,6 +35,8 @@
     <ClInclude Include="UI\headers\Panel.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Common\cpp\AssetPaths.cpp" />
+    <ClCompile Include="Common\cpp\Language.cpp" />
     <ClCompile Include="Core\cpp\ME_Main.cpp" />
     <ClCompile Include="Graphics\cpp\Canvas2DPanel.cpp" />
     <ClCompile Include="Graphics\cpp\gl.c" />

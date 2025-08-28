@@ -19,6 +19,10 @@ public:
     static void addTab(const std::string& title);
     static void closeTab(int index);
 
+    // Cambiar el título de la primera pestaña (lo usaremos cuando exista el sistema de proyectos/mapas)
+    static void setFirstTabTitle(const std::string& title);
+
+
     static void shutdown(); // liberar texturas
 
 private:

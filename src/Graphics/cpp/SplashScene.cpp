@@ -2,6 +2,7 @@
 #include "SplashScene.h"
 #include <windows.h>
 #include <string>
+#include "AssetPaths.h"   // <- rutas centralizadas
 
 static LRESULT CALLBACK SplashWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     if (msg == WM_DESTROY) {
@@ -26,7 +27,6 @@ void mostrarSplashScreen(const char* rutaImagen, int ancho, int alto, int milise
     std::wstring rutaW(len, 0);
     MultiByteToWideChar(CP_UTF8, 0, rutaImagen, -1, &rutaW[0], len);
 
-
     // Centrar la ventana en pantalla
     int screenWidth = GetSystemMetrics(SM_CXSCREEN);
     int screenHeight = GetSystemMetrics(SM_CYSCREEN);
@@ -42,13 +42,13 @@ void mostrarSplashScreen(const char* rutaImagen, int ancho, int alto, int milise
         NULL, NULL, hInstance, NULL
     );
 
-    // Cargar imagen BMP
-    HBITMAP hBitmap = cargarRTXComoBitmap("Data/Interface/splash.rtx");
+    // Cargar imagen RTX desde rutas centralizadas
+    // Anteriormente: "Data/Interface/splash.rtx"
+    HBITMAP hBitmap = cargarRTXComoBitmap(Paths::InInterface("splash.rtx").c_str());
     if (!hBitmap) return;
 
     ShowWindow(hwnd, SW_SHOW);
     SetWindowPos(hwnd, HWND_TOPMOST, x, y, ancho, alto, SWP_NOZORDER | SWP_NOSIZE | SWP_SHOWWINDOW);
-
     UpdateWindow(hwnd);
 
     HDC hdc = GetDC(hwnd);
@@ -67,3 +67,4 @@ void mostrarSplashScreen(const char* rutaImagen, int ancho, int alto, int milise
     DeleteObject(hBitmap);
     UnregisterClass(CLASS_NAME, hInstance);
 }
+

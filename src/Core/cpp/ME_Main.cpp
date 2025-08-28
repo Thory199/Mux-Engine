@@ -4,10 +4,12 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 #include "DockManager.h"
+#include <filesystem>  // <- AÑADIR
 #include "MainTabBar.h"
-
-// ✅ rutas centralizadas
 #include "AssetPaths.h"
+
+// 🔤 Nuevo: sistema de idioma
+#include "Language.h"
 
 SDL_Window* gWindow = nullptr;
 const int WIDTH = 1280;
@@ -28,9 +30,8 @@ int main(int argc, char* argv[]) {
     if (TTF_Init() == -1) { std::cerr << "Error SDL_ttf: " << TTF_GetError() << std::endl; SDL_Quit(); return -1; }
     if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) { std::cerr << "Error SDL_image: " << IMG_GetError() << std::endl; SDL_Quit(); return -1; }
 
-
-    // 👉 Añade esto inmediatamente después de SDL_Init
-    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best"); // best o "linear"
+    // (Opcional) mejor escalado si redimensionas
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "best");
 
     gWindow = SDL_CreateWindow("",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -39,17 +40,49 @@ int main(int argc, char* argv[]) {
 
     SDL_SetWindowBordered(gWindow, SDL_FALSE);
 
-    // Icono de ventana (solo para la barra del SO)
-    SDL_Surface* icon = SDL_LoadBMP("Data/Interface/ComingViewIcon.bmp");
+    // Icono de ventana (te dejo tu BMP tal cual lo tenías)
+    SDL_Surface* icon = SDL_LoadBMP(Paths::InInterface("ComingViewIcon.bmp").c_str());
     if (icon) { SDL_SetWindowIcon(gWindow, icon); SDL_FreeSurface(icon); }
 
     SDL_Renderer* renderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
     if (!renderer) { std::cerr << "Error al crear renderer: " << SDL_GetError() << std::endl; SDL_DestroyWindow(gWindow); SDL_Quit(); return -1; }
 
-    TTF_Font* font = TTF_OpenFont("Data/Local/Fonts/Roboto-Regular.ttf", 16);
+    // Fuente
+    TTF_Font* font = TTF_OpenFont(Paths::InFonts("Roboto-Regular.ttf").c_str(), 16);
     if (!font) { std::cerr << "Error al cargar fuente: " << TTF_GetError() << std::endl; SDL_DestroyRenderer(renderer); SDL_DestroyWindow(gWindow); SDL_Quit(); return -1; }
 
-    // Logo UI (PNG con transparencia) usando Paths
+    namespace fs = std::filesystem;
+
+    // 🔤 Cargar idioma por defecto (inglés), con fallbacks
+    bool loaded = ME1::Lang::Load(Paths::InLanguage("en_US.lang"));
+    if (!loaded) {
+        loaded = ME1::Lang::Load(Paths::InLanguage("es_ES.lang"));
+    }
+    if (!loaded) {
+        // Fallback final: primer .lang que exista en la carpeta
+        try {
+            const std::string langDir = Paths::LanguageRoot; // "Data/Local/language/"
+            if (fs::exists(langDir) && fs::is_directory(langDir)) {
+                for (const auto& e : fs::directory_iterator(langDir)) {
+                    if (e.is_regular_file() && e.path().extension() == ".lang") {
+                        if (ME1::Lang::Load(e.path().string())) {
+                            loaded = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        catch (...) {
+            // ignoramos errores de filesystem
+        }
+    }
+
+    // Título de ventana desde el archivo de idioma (opcional)
+    SDL_SetWindowTitle(gWindow, ME1::Lang::T("ui.title").c_str());
+
+
+    // Logo UI (PNG con transparencia) usando Paths (tal cual tenías)
     SDL_Texture* gLogoTex = IMG_LoadTexture(renderer, Paths::LogoPNG);
     if (!gLogoTex) { std::cerr << "Error al cargar logo PNG: " << IMG_GetError() << " (ruta: " << Paths::LogoPNG << ")\n"; }
 
@@ -97,10 +130,10 @@ int main(int argc, char* argv[]) {
 
         int winW, winH; SDL_GetWindowSize(gWindow, &winW, &winH);
 
-        // 1) Barra de pestañas (fondo + tabs + botones) - CAPA INFERIOR
+        // 1) Barra de pestañas (fondo + tabs + botones)
         MainTabBar::render(renderer, font);
 
-        // 2) Logo por encima de la barra (para que no lo tape el fondo)
+        // 2) Logo por encima de la barra (como tenías)
         if (gLogoTex) {
             int tw = 0, th = 0; SDL_QueryTexture(gLogoTex, nullptr, nullptr, &tw, &th);
             const int targetH = 24;
@@ -109,14 +142,14 @@ int main(int argc, char* argv[]) {
             SDL_RenderCopy(renderer, gLogoTex, nullptr, &dstLogo);
         }
 
-        // 3) Barra de menú
+        // 3) Barra de menú (usando idioma)
         SDL_Rect menuBar = { 0, 30, winW, 30 };
         SDL_SetRenderDrawColor(renderer, 40, 40, 40, 255);
         SDL_RenderFillRect(renderer, &menuBar);
-        RenderText(renderer, font, "File", 10, 37);
-        RenderText(renderer, font, "Edit", 60, 37);
-        RenderText(renderer, font, "Window", 110, 37);
-        RenderText(renderer, font, "Help", 190, 37);
+        RenderText(renderer, font, ME1::Lang::T("ui.menu.file").c_str(), 10, 37);
+        RenderText(renderer, font, ME1::Lang::T("ui.menu.edit").c_str(), 60, 37);
+        RenderText(renderer, font, ME1::Lang::T("ui.menu.window").c_str(), 110, 37);
+        RenderText(renderer, font, ME1::Lang::T("ui.menu.help").c_str(), 190, 37);
 
         // 4) Contenido (docks)
         DockManager::render(renderer, font);
