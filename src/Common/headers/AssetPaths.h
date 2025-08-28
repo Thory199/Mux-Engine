@@ -19,6 +19,10 @@ namespace Paths {
 
 	inline constexpr const char* TabItem = "Data/Interface/TabItem.png"; // NUEVO
 
+	// Fondo del editor (opcional, por consistencia)
+	inline constexpr const char* EditorBg = "Data/Interface/fondomux.png";
+
+
 	// --- Rutas reales según tu proyecto ---
 	inline constexpr const char* LocaleRoot = "Data/Local/";
 	inline constexpr const char* LocalFonts = "Data/Local/Fonts/";

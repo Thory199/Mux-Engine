@@ -22,6 +22,13 @@ static SDL_Rect gDevToolsItemRect{ 0,0,0,0 }; // item "Developer Tools" del drop
 static SDL_Rect gDevToolsMenuRect{ 0,0,0,0 }; // panel del submenú Developer Tools
 static SDL_Rect gOutputLogItemRect{ 0,0,0,0 }; // item "Output Log" del submenú
 
+// --- Texturas UI ---
+static SDL_Texture* gLogoTex = nullptr; // logo superior izq
+static SDL_Texture* gBgTex = nullptr; // FONDO (fondomux.png)
+
+// ------------------------------------------------------------------
+// Helpers
+// ------------------------------------------------------------------
 void RenderText(SDL_Renderer* renderer, TTF_Font* font, const char* text, int x, int y) {
     SDL_Color white = { 255, 255, 255, 255 };
     SDL_Surface* surface = TTF_RenderText_Solid(font, text, white);
@@ -31,6 +38,32 @@ void RenderText(SDL_Renderer* renderer, TTF_Font* font, const char* text, int x,
     SDL_RenderCopy(renderer, texture, nullptr, &dst);
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
+}
+
+// Escalado tipo "cover": llena el área manteniendo aspecto y centrando (puede recortar).
+void RenderTextureCover(SDL_Renderer* r, SDL_Texture* tex, const SDL_Rect& area) {
+    if (!tex) return;
+    int tw = 0, th = 0;
+    if (SDL_QueryTexture(tex, nullptr, nullptr, &tw, &th) != 0 || tw == 0 || th == 0) return;
+
+    // cover: elige el mayor scale para cubrir todo el área
+    const float sx = area.w / float(tw);
+    const float sy = area.h / float(th);
+    
+    
+    // const float scale = (sx > sy) ? sx : sy;  // esto era cover
+    const float scale = 0.8f; // 70% del tamaño original de la imagen
+
+
+
+    const int dw = int(tw * scale);
+    const int dh = int(th * scale);
+    const SDL_Rect dst = {
+        area.x + (area.w - dw) / 2,
+        area.y + (area.h - dh) / 2,
+        dw, dh
+    };
+    SDL_RenderCopy(r, tex, nullptr, &dst);
 }
 
 int main(int argc, char* argv[]) {
@@ -78,9 +111,20 @@ int main(int argc, char* argv[]) {
     }
     SDL_SetWindowTitle(gWindow, ME1::Lang::T("ui.title").c_str());
 
-    // Logo PNG
-    SDL_Texture* gLogoTex = IMG_LoadTexture(renderer, Paths::LogoPNG);
+    // Logo PNG (superior izq)
+    gLogoTex = IMG_LoadTexture(renderer, Paths::LogoPNG);
     if (!gLogoTex) { std::cerr << "Error al cargar logo PNG: " << IMG_GetError() << " (ruta: " << Paths::LogoPNG << ")\n"; }
+
+    // FONDO: fondomux.png (transparente y con blend)
+    gBgTex = gBgTex = IMG_LoadTexture(renderer, Paths::EditorBg);
+
+    if (!gBgTex) {
+        std::cerr << "Error al cargar fondomux.png: " << IMG_GetError() << "\n";
+    }
+    else {
+        SDL_SetTextureBlendMode(gBgTex, SDL_BLENDMODE_BLEND);
+        SDL_SetTextureAlphaMod(gBgTex, 96); // 0..255 (96 ~ 38% opacidad). Ajusta a gusto.
+    }
 
     DockManager::initialize();
     MainTabBar::initialize(renderer);
@@ -172,6 +216,12 @@ int main(int argc, char* argv[]) {
         SDL_RenderClear(renderer);
 
         int winW, winH; SDL_GetWindowSize(gWindow, &winW, &winH);
+
+        // Área central (debajo de tabs+menú: 30 + 30 = 60px)
+        SDL_Rect contentArea = { 0, 60, winW, winH - 60 };
+
+        // --- FONDO: imagen "fondomux.png" con transparencia, centrada y a pantalla completa del área ---
+        RenderTextureCover(renderer, gBgTex, contentArea);
 
         // 1) Barra de pestañas
         MainTabBar::render(renderer, font);
@@ -272,6 +322,7 @@ int main(int argc, char* argv[]) {
     // Cleanup
     MainTabBar::shutdown();
     if (gLogoTex) SDL_DestroyTexture(gLogoTex);
+    if (gBgTex)   SDL_DestroyTexture(gBgTex);
     TTF_CloseFont(font);
     TTF_Quit();
     IMG_Quit();
@@ -280,5 +331,6 @@ int main(int argc, char* argv[]) {
     SDL_Quit();
     return 0;
 }
+
 
 
