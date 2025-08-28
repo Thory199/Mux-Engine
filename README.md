@@ -78,7 +78,11 @@ AUN ESTAMOS EMPEZANDO
 
 
 
-![Mux Engine – captura](docs/img/mux_engine_001.png "Estado actual del motor")
+![Mux Engine – captura](docs/img/mux_engine_001.1.png "Estado actual del motor 1")
+
+![Mux Engine – captura](docs/img/mux_engine_001.2.png "Estado actual del motor 2")
+
+
 
 
 
