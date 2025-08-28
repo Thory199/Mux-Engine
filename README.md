@@ -6,7 +6,7 @@ Estado actual
 
 🔧 En desarrollo – fase de arquitectura y pruebas.
 
-AQUI SE ARAN LOS CAMBIOS Y CUANDO TODO ESTE BIEN SE PASARA LA RAMA MASTER .
+AQUI SE ARAN LOS CAMBIOS Y CUANDO TODO ESTE BIEN SE PASARA A LA RAMA MASTER .
 
 ✨ Autor
 
