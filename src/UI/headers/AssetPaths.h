@@ -12,4 +12,7 @@ namespace Paths {
     inline constexpr const char* TabBarBG = "Data/Interface/BARPESTANA.png";
     // Si mantienes la Ñ, usa:
     // inline constexpr const char* TabBarBG = u8"Data/Interface/BARPESTAÑA.png";
+
+
+    inline constexpr const char* TabItem = "Data/Interface/TabItem.png"; // NUEVO
 }
